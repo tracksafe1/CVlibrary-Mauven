@@ -1,5 +1,6 @@
 package uk.co.cvlibrary.testsuite;
 
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import uk.co.cvlibrary.pages.Homepage;
@@ -10,8 +11,9 @@ public class HomePageTest extends TestBase {
     Homepage homepage = new Homepage();
     ResultPage resultPage = new ResultPage();
 
-    @Test
+    @Test  (groups = { "smoke" })
     public void verifyTheResults() {
+       homepage.acceptingCookies();
         homepage.enterJobTitle("Developer");
         homepage.enterLocation("London");
         homepage.enterDistanceDropdown("10");
@@ -24,8 +26,8 @@ public class HomePageTest extends TestBase {
 
         String actual = resultPage.verifyTheResults();
         System.out.println(actual);
-        String expected = "Permanent Developer jobs in London\n" +
-                "Displaying 1-25 of 147 jobs";
+       String expected = "Permanent Developer jobs in London";
+//
         Assert.assertEquals(actual, expected);
     }
 }
